@@ -6,11 +6,29 @@
     <title>LearnWithVarunGoud - Site Under Development</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Ensures the body takes up at least the full viewport height */
-        html, body { height: 100%; }
-        body { display: flex; align-items: center; justify-content: center; background-color: #f3f4f6; }
-    </style>
+  <style>
+    /* Ensures the body takes up at least the full viewport height */
+    html, body { height: 100%; }
+    body { display: flex; align-items: center; justify-content: center; background-color: #f3f4f6; }
+
+    /* Simple fade-in animation for content */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up { animation: fadeInUp 700ms ease both; }
+
+    /* Countdown number styling fallback */
+    .countdown-number { font-feature-settings: "tnum" 1; font-variant-numeric: tabular-nums; }
+
+    /* Live celebration animation */
+    @keyframes liveBurst {
+      0% { transform: scale(0.95); opacity: 0.9; }
+      50% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .live-burst { animation: liveBurst 900ms cubic-bezier(.2,.9,.2,1) both; color: #047857; }
+  </style>
 </head>
 <body class="bg-gray-50">
     
@@ -18,7 +36,7 @@
         
         <h1 class="text-4xl font-extrabold text-indigo-600 mb-6">LearnWithVarunGoud</h1>
 
-        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-900 p-6 rounded-lg shadow-xl">
+        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-900 p-6 rounded-lg shadow-xl fade-in-up">
           <div class="flex items-center mb-4 justify-center">
             <i class="fas fa-tools text-3xl mr-3 text-blue-600"></i>
             <h2 class="text-2xl font-bold">Site Under Development</h2>
@@ -34,17 +52,80 @@
           </ul>
           
           <p class="mt-6 text-lg font-medium text-blue-800">Stay tuned for the launch!</p>
+          <div class="mt-4 p-4 bg-white rounded-lg shadow-sm text-center">
+            <div class="text-sm text-gray-500 mb-2">Official launch (Diwali)</div>
+            <div id="countdown" class="flex justify-center gap-4 text-gray-800 text-center">
+              <div class="px-3 py-2">
+                <div id="days" class="text-2xl font-bold countdown-number">0</div>
+                <div class="text-xs text-gray-500">Days</div>
+              </div>
+              <div class="px-3 py-2">
+                <div id="hours" class="text-2xl font-bold countdown-number">00</div>
+                <div class="text-xs text-gray-500">Hours</div>
+              </div>
+              <div class="px-3 py-2">
+                <div id="minutes" class="text-2xl font-bold countdown-number">00</div>
+                <div class="text-xs text-gray-500">Minutes</div>
+              </div>
+              <div class="px-3 py-2">
+                <div id="seconds" class="text-2xl font-bold countdown-number">00</div>
+                <div class="text-xs text-gray-500">Seconds</div>
+              </div>
+            </div>
+            <div id="launch-note" class="mt-2 text-indigo-700 text-sm font-semibold">We go live on <span class="underline">Diwali, 20 Oct 2025 at 12:12 PM</span></div>
+          </div>
         </div>
         
-        <div class="mt-8">
-            <a href="#" class="inline-flex items-center bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg">
-                <i class="fas fa-bell mr-2"></i> Get Notified When We Launch
-            </a>
-        </div>
+    <div class="mt-8">
+      <a href="#" class="inline-flex items-center bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg animate-pulse" aria-label="Get notified when we launch">
+        <i class="fas fa-bell mr-2"></i> Get Notified When We Launch
+      </a>
+    </div>
+        <span class="block mt-2 text-base text-indigo-700 font-semibold">
+  We go live on <span class="underline">Diwali, 20th Oct 2025 at 12:12 PM</span>!
+</span>
         
         <p class="text-gray-400 text-sm mt-12">&copy; 2025 LearnWithVarunGoud. All rights reserved.</p>
 
     </div>
+
+  <!-- Countdown script: updates the countdown and shows live message when reached -->
+  <script>
+    // Launch: Oct 20 2025 12:12:00 local time
+    const launchDate = new Date(2025, 9, 20, 12, 12, 0);
+
+    function pad(n){ return n < 10 ? '0' + n : n; }
+
+    function updateCountdown(){
+      const now = new Date();
+      let diff = Math.max(0, launchDate - now);
+
+      const seconds = Math.floor((diff / 1000) % 60);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      if(daysEl) daysEl.textContent = days;
+      if(hoursEl) hoursEl.textContent = pad(hours);
+      if(minutesEl) minutesEl.textContent = pad(minutes);
+      if(secondsEl) secondsEl.textContent = pad(seconds);
+
+      if(diff <= 0){
+        clearInterval(intervalId);
+        const countdown = document.getElementById('countdown');
+        if(countdown) countdown.innerHTML = '<div class="text-xl font-bold live-burst">We are live now! 🎉</div>';
+        const note = document.getElementById('launch-note');
+        if(note) note.textContent = 'Welcome — LearnWithVarunGoud is now live!';
+      }
+    }
+
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+  </script>
 
 </body>
 </html>
