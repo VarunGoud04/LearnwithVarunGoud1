@@ -1,131 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnWithVarunGoud - Site Under Development</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnWithVarunGoud - Loading...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="https://learnwithvarungoud.netlify.app/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Redirecting to LearnWithVarunGoud — your complete LMS for B.Tech students.">
+  
   <style>
-    /* Ensures the body takes up at least the full viewport height */
-    html, body { height: 100%; }
-    body { display: flex; align-items: center; justify-content: center; background-color: #f3f4f6; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #6366f1, #a5b4fc);
+      background-size: 200% 200%;
+      animation: bgMove 6s ease infinite;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
 
-    /* Simple fade-in animation for content */
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-    .fade-in-up { animation: fadeInUp 700ms ease both; }
 
-    /* Countdown number styling fallback */
-    .countdown-number { font-feature-settings: "tnum" 1; font-variant-numeric: tabular-nums; }
+    .fade-in { animation: fadeInUp 1s ease-out both; }
 
-    /* Live celebration animation */
-    @keyframes liveBurst {
-      0% { transform: scale(0.95); opacity: 0.9; }
-      50% { transform: scale(1.08); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 25px auto;
     }
-    .live-burst { animation: liveBurst 900ms cubic-bezier(.2,.9,.2,1) both; color: #047857; }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
-<body class="bg-gray-50">
-    
-    <div class="max-w-xl mx-auto p-8 text-center">
-        
-        <h1 class="text-4xl font-extrabold text-indigo-600 mb-6">LearnWithVarunGoud</h1>
 
-        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-900 p-6 rounded-lg shadow-xl fade-in-up">
-          <div class="flex items-center mb-4 justify-center">
-            <i class="fas fa-tools text-3xl mr-3 text-blue-600"></i>
-            <h2 class="text-2xl font-bold">Site Under Development</h2>
-          </div>
-          
-          <p class="mb-4 text-left">We are currently building a comprehensive Learning Management System (LMS) dedicated to B.Tech students.</p>
-          
-          <p class="text-left font-semibold mb-3">Our platform will soon feature:</p>
-          <ul class="list-disc list-inside text-left text-sm space-y-1 pl-4">
-            <li><span class="font-semibold">Regulation-wise Materials:</span> R18, R22, R23, and <span class="font-semibold">R24</span> resources.</li>
-            <li><span class="font-semibold">Full Study Packs:</span> Previous year papers, detailed notes, and video lectures.</li>
-            <li>Easy, centralized access for all engineering branches.</li>
-          </ul>
-          
-          <p class="mt-6 text-lg font-medium text-blue-800">Stay tuned for the launch!</p>
-          <div class="mt-4 p-4 bg-white rounded-lg shadow-sm text-center">
-            <div class="text-sm text-gray-500 mb-2">Official launch (Diwali)</div>
-            <div id="countdown" class="flex justify-center gap-4 text-gray-800 text-center">
-              <div class="px-3 py-2">
-                <div id="days" class="text-2xl font-bold countdown-number">0</div>
-                <div class="text-xs text-gray-500">Days</div>
-              </div>
-              <div class="px-3 py-2">
-                <div id="hours" class="text-2xl font-bold countdown-number">00</div>
-                <div class="text-xs text-gray-500">Hours</div>
-              </div>
-              <div class="px-3 py-2">
-                <div id="minutes" class="text-2xl font-bold countdown-number">00</div>
-                <div class="text-xs text-gray-500">Minutes</div>
-              </div>
-              <div class="px-3 py-2">
-                <div id="seconds" class="text-2xl font-bold countdown-number">00</div>
-                <div class="text-xs text-gray-500">Seconds</div>
-              </div>
-            </div>
-            <div id="launch-note" class="mt-2 text-indigo-700 text-sm font-semibold">We go live on <span class="underline">Diwali, 20 Oct 2025 at 12:12 PM</span></div>
-          </div>
-        </div>
-        
-    <div class="mt-8">
-      <a href="#" class="inline-flex items-center bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg animate-pulse" aria-label="Get notified when we launch">
-        <i class="fas fa-bell mr-2"></i> Get Notified When We Launch
-      </a>
-    </div>
-        <span class="block mt-2 text-base text-indigo-700 font-semibold">
-  We go live on <span class="underline">Diwali, 20th Oct 2025 at 12:12 PM</span>!
-</span>
-        
-        <p class="text-gray-400 text-sm mt-12">&copy; 2025 LearnWithVarunGoud. All rights reserved.</p>
+<body>
+  <div class="fade-in">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-wide">LearnWithVarunGoud</h1>
+    <div class="spinner"></div>
+    <p class="loading-text font-semibold">Redirecting to the main site...</p>
+  </div>
 
-    </div>
-
-  <!-- Countdown script: updates the countdown and shows live message when reached -->
   <script>
-    // Launch: Oct 20 2025 12:12:00 local time
-    const launchDate = new Date(2025, 9, 20, 12, 12, 0);
-
-    function pad(n){ return n < 10 ? '0' + n : n; }
-
-    function updateCountdown(){
-      const now = new Date();
-      let diff = Math.max(0, launchDate - now);
-
-      const seconds = Math.floor((diff / 1000) % 60);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-      const daysEl = document.getElementById('days');
-      const hoursEl = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-      const secondsEl = document.getElementById('seconds');
-      if(daysEl) daysEl.textContent = days;
-      if(hoursEl) hoursEl.textContent = pad(hours);
-      if(minutesEl) minutesEl.textContent = pad(minutes);
-      if(secondsEl) secondsEl.textContent = pad(seconds);
-
-      if(diff <= 0){
-        clearInterval(intervalId);
-        const countdown = document.getElementById('countdown');
-        if(countdown) countdown.innerHTML = '<div class="text-xl font-bold live-burst">We are live now! 🎉</div>';
-        const note = document.getElementById('launch-note');
-        if(note) note.textContent = 'Welcome — LearnWithVarunGoud is now live!';
-      }
-    }
-
-    updateCountdown();
-    const intervalId = setInterval(updateCountdown, 1000);
+    // Auto redirect after 2.5 seconds
+    setTimeout(() => {
+      window.location.href = "https://learnwithvarungoud.netlify.app/";
+    }, 2500);
   </script>
-
 </body>
 </html>
